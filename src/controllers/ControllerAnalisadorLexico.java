@@ -39,7 +39,6 @@ public class ControllerAnalisadorLexico {
         return null;
     }
     
-    
     public boolean cadeiaDeCaracteres(String cadeia) {
         // Adicionar a regex
         return cadeia.matches("[a-zA-Z|0-9|_]*");
