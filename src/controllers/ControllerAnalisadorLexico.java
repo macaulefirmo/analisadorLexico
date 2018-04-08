@@ -29,8 +29,9 @@ public class ControllerAnalisadorLexico {
                     System.out.println("Cadeia: "+cadeia);
                     if(cadeiaDeCaracteres(cadeia)){                        
                         System.out.println("Cadeia aceita!");
-                    }
-                    System.out.println("Cadeia rejeitada");  
+                    }else {
+                      System.out.println("Erro - Cadeia rejeitada");  
+                    }                      
                 }                           
             }
             i++;        
