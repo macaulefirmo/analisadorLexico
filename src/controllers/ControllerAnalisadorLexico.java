@@ -8,7 +8,7 @@ public class ControllerAnalisadorLexico {
         do {
             char atual = texto.charAt(i);
             if(atual == '"') {                
-                System.out.println("Inicio de cadeia encontrado"); 
+                //System.out.println("Inicio de cadeia encontrado"); 
                 i++;
                 char atual2 = texto.charAt(i);
                 String cadeia = "";
@@ -41,6 +41,6 @@ public class ControllerAnalisadorLexico {
     
     public boolean cadeiaDeCaracteres(String cadeia) {
         // Adicionar a regex
-        return cadeia.matches("[a-zA-Z|0-9|_]*");
+        return cadeia.matches("[a-z|A-Z|0-9]*");
     }
 }
