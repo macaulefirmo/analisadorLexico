@@ -32,9 +32,8 @@ public class ControllerAnalisadorLexico {
                     }
                     System.out.println("Cadeia rejeitada");  
                 }                           
-            } else {
-               i++; 
-            }            
+            }
+            i++;        
         } while(i < texto.length());   
         return null;
     }
