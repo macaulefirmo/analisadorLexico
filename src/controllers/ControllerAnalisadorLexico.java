@@ -40,7 +40,10 @@ public class ControllerAnalisadorLexico {
     }
     
     public boolean cadeiaDeCaracteres(String cadeia) {
-        // Adicionar a regex
-        return cadeia.matches("[a-z|A-Z|0-9]*");
+        
+        String especiais = "\\]|\\[|\\+|\\$|\\^|\\{|\\}|\\|\\?|\\.|\\(|\\)|\\*|\\-|\\\\|";
+        String outros = "a-z|A-Z|0-9|";
+        String asc = " |#|!|%|´|`|@|/|~|_|<|>|=|:|;|,|'|&";
+        return cadeia.matches("["+especiais+outros+asc+"]*");
     }
 }
