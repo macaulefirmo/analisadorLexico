@@ -5,16 +5,24 @@ public class ControllerAnalisadorLexico {
     public String lerIdentificador(String texto){
             
         int i = 0;
+        int linha = 0;
         do {
             char atual = texto.charAt(i);
             String id = Character.toString(atual);
-            if(letra(id)== true) {                
+            if(letra(id)== true) {//verifica se inicia em uma letra                
                 //System.out.println("Inicio do identif"); 
-                i++;
+                
                 char atual2 = texto.charAt(i);
+                i++;//incrementa depois já que a primeira letra compoe o nome do identificador.
+                if(atual2=='\n'){ //incrementa a linha
+                linha++;
+                }
                 String identif = "";
                 boolean controleErro = true;
-                while(atual2 != ';') {                      
+                String id2 = Character.toString(atual2);
+                while(!separadorId(id2)) {//enquanto os caracteres lidos forem diferentes desse conjunto o laço continua  
+                    
+                    
                     identif += Character.toString(atual2);
                     i++;                    
                     if(i >= texto.length()) {
@@ -26,13 +34,13 @@ public class ControllerAnalisadorLexico {
                         atual2 = texto.charAt(i);
                     }                                             
                 }
-            
+            //CRIA UMA LISTA E ADICIONA AQUI O PRIMEIRO IDENTIFICADOR NA LISTA  - IDEIA - 
                 if(controleErro) {
-                    System.out.println("Cadeia: "+identif);
+                    System.out.println("Identificadores: "+identif);
                     if(cadeiaDeCaracteres(identif)){                        
                         System.out.println("Cadeia aceita!");
                     }else {
-                      System.out.println("Erro - Cadeia rejeitada");  
+                      System.out.println("Erro na linha:"+linha+" - Cadeia rejeitada");  
                     }                      
                 }                           
             }
