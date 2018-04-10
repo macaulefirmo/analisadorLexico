@@ -1,0 +1,8 @@
+"Testando 123 ... \"Assim Funciona\" ";
+
+"Tesde de 
+Quebra de linha";
+
+"Assim não funciona";
+
+"Assim nao funciona \";

@@ -8,7 +8,7 @@ public class Main {
     public static void main(String args[]) {
         
         ManipulaArquivo ma = new ManipulaArquivo();
-        String texto = ma.lerArquivo("arquivo.txt");
+        String texto = ma.lerArquivo("arquivo2.txt");
         //System.out.println("Texto a ser lido: "+texto);
         
         ControllerAnalisadorLexico ctr = new ControllerAnalisadorLexico();
