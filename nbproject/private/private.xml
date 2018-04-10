@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/Infor%20andrade/github/analisadorLexico/src/controllers/ControllerAnalisadorLexico.java</file>
+=======
+            <file>file:/D:/Documentos/UEFS/6º%20Semetre/MI%20-%20Compiladores/Problema%2001/Problema1/src/view/Main.java</file>
+>>>>>>> a5d46ca84a8f88eb97a8c7a40fdc675d75b518d9
+        </group>
+>>>>>>> refs/remotes/origin/master
     </open-files>
 </project-private>

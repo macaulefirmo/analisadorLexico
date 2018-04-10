@@ -2,12 +2,55 @@ package controllers;
 
 public class ControllerAnalisadorLexico {
     
-    /**
-     * Le caractere por caractere de uma String.
-     * @param texto String a ser lida
-     * @return 
-     */
+    public String lerIdentificador(String texto){
+            
+        int i = 0;
+        int linha = 0;
+        do {
+            char atual = texto.charAt(i);
+            String id = Character.toString(atual);
+            if(letra(id)== true) {//verifica se inicia em uma letra                
+                //System.out.println("Inicio do identif"); 
+                
+                char atual2 = texto.charAt(i);
+                i++;//incrementa depois já que a primeira letra compoe o nome do identificador.
+                if(atual2=='\n'){ //incrementa a linha
+                linha++;
+                }
+                String identif = "";
+                boolean controleErro = true;
+                String id2 = Character.toString(atual2);
+                while(!separadorId(id2)) {//enquanto os caracteres lidos forem diferentes desse conjunto o laço continua  
+                    
+                    
+                    identif += Character.toString(atual2);
+                    i++;                    
+                    if(i >= texto.length()) {
+                        // Erro - Fecha aspas não encontrado.
+                        System.out.println("Erro - Fecha aspas não encontrado!");
+                        controleErro = false;
+                        break;
+                    } else {
+                        atual2 = texto.charAt(i);
+                    }                                             
+                }
+            //CRIA UMA LISTA E ADICIONA AQUI O PRIMEIRO IDENTIFICADOR NA LISTA  - IDEIA - 
+                if(controleErro) {
+                    System.out.println("Identificadores: "+identif);
+                    if(cadeiaDeCaracteres(identif)){                        
+                        System.out.println("Cadeia aceita!");
+                    }else {
+                      System.out.println("Erro na linha:"+linha+" - Cadeia rejeitada");  
+                    }                      
+                }                           
+            }
+            i++;        
+        } while(i < texto.length());   
+        return null;
+    }
+    
     public void lerCaracteres(String texto){
+
         
         int i = 0;
         int linha = 0;
@@ -78,5 +121,18 @@ public class ControllerAnalisadorLexico {
         // Asc - Os caracteres da tabela ascII que nao foram encluidos acima.
         String asc = " |#|!|%|´|`|@|/|~|_|<|>|=|:|;|,|'|&";
         return cadeia.matches("["+especiais+outros+asc+"]*");
+    }
+    public boolean identificador(String id){
+    
+        return id.matches("[a-z|A-Z|0-9|\\_]*");
+    }
+    public boolean letra(String letra){
+    
+        return letra.matches("[a-z|A-Z]");
+    
+    }
+    public boolean separadorId(String separador){
+    
+        return separador.matches("[\32|\\,|\\.|\\;]");
     }
 }
