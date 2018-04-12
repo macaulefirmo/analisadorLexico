@@ -1,62 +1,151 @@
 package controllers;
 
 public class ControllerAnalisadorLexico {
-    
-    public String lerIdentificador(String texto){
-            
+     
+    public void lerCaracteres(String texto){
+
         int i = 0;
-        int linha = 0;
+        int linha = 1;
         do {
-            char atual = texto.charAt(i);
-            String id = Character.toString(atual);
-            if(letra(id)== true) {//verifica se inicia em uma letra                
-                //System.out.println("Inicio do identif"); 
-                
-                char atual2 = texto.charAt(i);
-                i++;//incrementa depois já que a primeira letra compoe o nome do identificador.
-                if(atual2=='\n'){ //incrementa a linha
-                linha++;
+            char atual = texto.charAt(i);                                 
+            if(operadoresLogicos(Character.toString(atual))){
+                int j = i+1;
+                char atual2 = texto.charAt(j);
+                if(atual == '&') {
+                    if(atual2 == '&') {
+                        System.out.println("O.L.: &&");
+                        i++;
+                    } else {
+                        System.out.println("O.L.: "+atual);
+                    }
+                } else if(atual == '|') {                    
+                    if(atual2 == '|') {
+                        System.out.println("O.L.: ||");
+                        i++;
+                    } else {
+                        System.out.println("O.L.: "+atual);
+                    }
                 }
-                String identif = "";
-                boolean controleErro = true;
-                String id2 = Character.toString(atual2);
-                while(!separadorId(id2)) {//enquanto os caracteres lidos forem diferentes desse conjunto o laço continua  
-                    
-                    
-                    identif += Character.toString(atual2);
+            } else if(operadoresRelacionais(Character.toString(atual))){
+                int j = i+1;
+                char atual2 = texto.charAt(j);                
+                if(atual == '!') {
+                    if(atual2 == '=') {
+                        System.out.println("O.R.: !=");
+                        i++;
+                    } else {
+                        System.out.println("O.L.: "+atual);
+                    }
+                } else if(atual == '=') {
+                    if(atual2 == '=') {
+                        System.out.println("O.R.: ==");
+                        i++;
+                    } else {
+                        System.out.println("O.R.: "+atual);
+                    }
+                } else if(atual == '<') {
+                    if(atual2 == '=') {
+                        System.out.println("O.R.: <=");
+                        i++;
+                    } else {
+                        System.out.println("O.R.: "+atual);
+                    }
+                } else if(atual == '>') {
+                    if(atual2 == '=') {
+                        System.out.println("O.R.: >=");
+                        i++;
+                    } else {
+                        System.out.println("O.R.: "+atual);
+                    }
+                }
+            } else if(delimitadores(Character.toString(atual))){
+                System.out.println("Delimitador: "+atual);
+            } else if(operadoresAritmeticos(Character.toString(atual))) {
+                int j = i+1;
+                char atual2 = texto.charAt(j);                                
+                if(atual == '/'){                    
+                    // Verifica se eh um comentario de linha
+                    if(atual2 == '/') {
+                        while(atual2 != '\n') { 
+                            i++; 
+                            // Verifica se chegou ao final da String
+                            if(i >= texto.length()) {
+                                System.out.println("Fim de Texto!");
+                                break;
+                            } 
+                            atual2 = texto.charAt(i);                        
+                        }    
+                        System.out.println("Comentario de linha ignorado!");
+                        // Incrementa a contagem de linha
+                        linha++;  
+                    // Verifica se eh um Comentario de Bloco    
+                    } else if (atual2 == '*') {                        
+                        char anterior = 'x';
+                        boolean chave = true;
+                        while(anterior != '*' && atual2 != '/') { 
+                            if(atual2 == '\n') {
+                                linha++;
+                            }
+                            i++; 
+                            // Verifica se chegou ao final da String
+                            if(i >= texto.length()) {
+                                System.out.println("Fim de Texto!");
+                                break;
+                            } 
+                            anterior = atual2;
+                            atual2 = texto.charAt(i);                        
+                        }
+                        System.out.println("Comentario de bloco ignorado!");
+                    } else {
+                        // adiciona / ao token 
+                        System.out.println("OP.A.: /");
+                    }
+                } else if(atual == '+') {
+                    if(atual2 == '+') {
+                        i++;
+                        // adiciona ++ ao token
+                        System.out.println("OP.A.: ++");
+                    } else {
+                        // adiciona + ao token
+                        System.out.println("OP.A.: +");
+                    }                    
+                } else if(atual == '-') {
+                    if(atual2 == '-') {
+                        i++;
+                        // adiciona -- ao token
+                        System.out.println("OP.A.: --");
+                    } else {
+                        // adiciona - ao token
+                        System.out.println("OP.A.: -");
+                    }
+                } else if(atual == '*') {
+                    // Adiciona * ao token
+                    System.out.println("OP.A.: *");
+                }
+            } else if(letra(Character.toString(atual))) {                
+                String palavra = "";
+                char atual2 = texto.charAt(i);
+                boolean controleErro = true;                  
+                while(condicaoFinal(Character.toString(atual2))) { 
+                    palavra += Character.toString(atual2);
                     i++;                    
                     if(i >= texto.length()) {
-                        // Erro - Fecha aspas não encontrado.
-                        System.out.println("Erro - Fecha aspas não encontrado!");
+                        // Erro - Fim de Texto.
+                        System.out.println("Erro na linha "+linha+" - Fim de Texto!");
                         controleErro = false;
                         break;
                     } else {
                         atual2 = texto.charAt(i);
                     }                                             
                 }
-            //CRIA UMA LISTA E ADICIONA AQUI O PRIMEIRO IDENTIFICADOR NA LISTA  - IDEIA - 
                 if(controleErro) {
-                    System.out.println("Identificadores: "+identif);
-                    if(cadeiaDeCaracteres(identif)){                        
-                        System.out.println("Cadeia aceita!");
-                    }else {
-                      System.out.println("Erro na linha:"+linha+" - Cadeia rejeitada");  
-                    }                      
-                }                           
-            }
-            i++;        
-        } while(i < texto.length());   
-        return null;
-    }
-    
-    public void lerCaracteres(String texto){
-
-        
-        int i = 0;
-        int linha = 0;
-        do {
-            char atual = texto.charAt(i);             
-            if(atual == '"') {   
+                    if(palavrasReservadas(palavra)) {
+                        System.out.println("Palavra Reservada: "+palavra);
+                    } else {
+                        System.out.println("Identificador: "+palavra);
+                    }
+                }
+            } else if(atual == '"') {   
                 // Inicio da cadeia de caracteres
                 i++;
                 char atual2 = texto.charAt(i);                
@@ -107,6 +196,74 @@ public class ControllerAnalisadorLexico {
             i++;        
         } while(i < texto.length());     
     }
+            
+    public boolean palavrasReservadas(String palavra) {
+        
+        if(palavra.equals("const")) {
+            return true;
+        } else if(palavra.equals("var")) {
+            return true;
+        } else if(palavra.equals("struct")) {
+            return true;
+        } else if(palavra.equals("typedef")) {
+            return true;
+        } else if(palavra.equals("procedure")) {
+            return true;
+        } else if(palavra.equals("function")) {
+            return true;
+        } else if(palavra.equals("return")) {
+            return true;
+        } else if(palavra.equals("start")) {
+            return true;
+        } else if(palavra.equals("if")) {
+            return true;
+        } else if(palavra.equals("then")) {
+            return true;
+        } else if(palavra.equals("else")) {
+            return true;
+        } else if(palavra.equals("while")) {
+            return true;
+        } else if(palavra.equals("scan")) {
+            return true;
+        } else if(palavra.equals("print")) {
+            return true;
+        } else if(palavra.equals("int")) {
+            return true;
+        } else if(palavra.equals("float")) {
+            return true;
+        } else if(palavra.equals("bool")) {
+            return true;
+        } else if(palavra.equals("string")) {
+            return true;
+        } else if(palavra.equals("true")) {
+            return true;
+        } else if(palavra.equals("false")) {
+            return true;
+        } else if(palavra.equals("extends")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean operadoresAritmeticos(String caractere) {
+        return caractere.matches("[\\+|\\-|\\*|/]");
+    }
+    
+    public boolean operadoresRelacionais(String caractere) {
+        return caractere.matches("[!|=|<|>|]");
+    }
+    
+    public boolean operadoresLogicos(String caractere) {
+        if(caractere.equals("|")) {
+            return true;
+        } else {
+            return caractere.matches("[&]");
+        }
+    }
+    
+    public boolean delimitadores(String caractere) {
+        return caractere.matches("[;|,|\\(|\\)|\\[|\\]|\\{|\\}|\\.]");
+    }
     
     /**
      * Verifica se a cadeia recebida eh valida.
@@ -122,17 +279,12 @@ public class ControllerAnalisadorLexico {
         String asc = " |#|!|%|´|`|@|/|~|_|<|>|=|:|;|,|'|&";
         return cadeia.matches("["+especiais+outros+asc+"]*");
     }
-    public boolean identificador(String id){
     
-        return id.matches("[a-z|A-Z|0-9|\\_]*");
+    public boolean condicaoFinal(String caractere) {
+        return caractere.matches("[a-z|A-Z|0-9|_]*");
     }
+    
     public boolean letra(String letra){
-    
-        return letra.matches("[a-z|A-Z]");
-    
-    }
-    public boolean separadorId(String separador){
-    
-        return separador.matches("[\32|\\,|\\.|\\;]");
+        return letra.matches("[a-z|A-Z]"); 
     }
 }

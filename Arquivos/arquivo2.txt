@@ -1,0 +1,14 @@
++
+-
+*
+/
+++
+--
+// Comentario de linha auehuahuaehaeuheu
+"Testando 123 ... \"Assim Funciona\" ";
+/*
+Comentario de bloco
+ae
+heheheh
+*/
+"Assim não funciona";
