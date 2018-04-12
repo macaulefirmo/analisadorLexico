@@ -1,7 +1,22 @@
 package controllers;
 
+import persistencia.ManipulaArquivo;
+
 public class ControllerAnalisadorLexico {
      
+    public void start() {
+        ManipulaArquivo ma = new ManipulaArquivo();
+        String[] arquivos = ma.getArquivos();
+        for(int i=0; i<arquivos.length; i++) {
+            String texto = ma.lerArquivo(arquivos[i]);
+            if(!texto.isEmpty()) {
+                System.out.println(arquivos[i]);
+                System.out.println(texto);
+                lerCaracteres(texto);
+                System.out.println("--------------------------------------------");
+            }            
+        }
+    }
     public void lerCaracteres(String texto){
 
         int i = 0;
@@ -82,7 +97,10 @@ public class ControllerAnalisadorLexico {
                     } else if (atual2 == '*') {                        
                         char anterior = 'x';
                         boolean chave = true;
-                        while(anterior != '*' && atual2 != '/') { 
+                        while(chave) { 
+                            if(anterior == '*' && atual2 == '/'){
+                                chave = false;                                
+                            }
                             if(atual2 == '\n') {
                                 linha++;
                             }
@@ -163,6 +181,9 @@ public class ControllerAnalisadorLexico {
                         if(verifica == '"') {
                             cadeia += '\"';
                             i = i+2;
+                        } else {
+                            cadeia += Character.toString(atual2);
+                            i++; 
                         } 
                     } else {
                         cadeia += Character.toString(atual2);

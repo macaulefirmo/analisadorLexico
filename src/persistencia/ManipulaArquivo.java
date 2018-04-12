@@ -2,11 +2,30 @@ package persistencia;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class ManipulaArquivo {
+    
+    public String[] getArquivos() {
+        FileFilter filter = new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                return file.getName().endsWith(".txt");
+            }
+        };
+        File dir = new File("Arquivos");
+        File[] files = dir.listFiles(filter); 
+        String[] arquivos = new String[files.length];
+        for(int i=0; i<files.length; i++) {
+            
+            arquivos[i] = files[i].toString();
+        }
+        return arquivos;
+    }
     
     public String lerArquivo(String nomeArquivo) {
         
