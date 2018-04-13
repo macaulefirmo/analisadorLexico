@@ -51,10 +51,21 @@ public class ManipulaArquivo {
     public boolean salvaArquivo(String texto, String nomeArquivo) {
         
         try{
-            FileWriter fileWriter = new FileWriter(nomeArquivo);        
+            File file = new File(nomeArquivo);       
+            if(!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fileWriter = new FileWriter(file);        
             BufferedWriter bw = new BufferedWriter(fileWriter);
-
-            bw.write(texto);
+            
+            for(int i=0; i<texto.length(); i++){
+                if(texto.charAt(i) == '\n'){
+                    bw.newLine ();
+                } else {
+                    bw.write(texto.charAt(i));
+                }                
+            }
+            
 
             bw.close();
             return true;

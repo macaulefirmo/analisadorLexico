@@ -10,17 +10,18 @@ public class ControllerAnalisadorLexico {
         for(int i=0; i<arquivos.length; i++) {
             String texto = ma.lerArquivo(arquivos[i]);
             if(!texto.isEmpty()) {
-                System.out.println(arquivos[i]);
-                System.out.println(texto);
-                lerCaracteres(texto);
-                System.out.println("--------------------------------------------");
+                String erros = lerCaracteres(texto);
+                String[] arrayS = arquivos[i].split("\\\\");
+                System.out.println("Erros: "+erros);
+                ma.salvaArquivo(erros, "Arquivos/Compilados/compilado_"+arrayS[1]);
             }            
         }
     }
-    public void lerCaracteres(String texto){
+    public String lerCaracteres(String texto){
 
         int i = 0;
         int linha = 1;
+        String erros = "";
         do {
             char atual = texto.charAt(i);                                 
             if(operadoresLogicos(Character.toString(atual))){
@@ -28,7 +29,7 @@ public class ControllerAnalisadorLexico {
                 char atual2 = texto.charAt(j);
                 if(atual == '&') {
                     if(atual2 == '&') {
-                        System.out.println("O.L.: &&");
+                        // &&
                         i++;
                     } else {
                         System.out.println("O.L.: "+atual);
@@ -85,12 +86,11 @@ public class ControllerAnalisadorLexico {
                             i++; 
                             // Verifica se chegou ao final da String
                             if(i >= texto.length()) {
-                                System.out.println("Fim de Texto!");
+                                erros += "Erro - Final de comentario de linha nao encontrado\n";
                                 break;
                             } 
                             atual2 = texto.charAt(i);                        
                         }    
-                        System.out.println("Comentario de linha ignorado!");
                         // Incrementa a contagem de linha
                         linha++;  
                     // Verifica se eh um Comentario de Bloco    
@@ -100,18 +100,19 @@ public class ControllerAnalisadorLexico {
                         while(chave) { 
                             if(anterior == '*' && atual2 == '/'){
                                 chave = false;                                
-                            }
-                            if(atual2 == '\n') {
-                                linha++;
-                            }
-                            i++; 
-                            // Verifica se chegou ao final da String
-                            if(i >= texto.length()) {
-                                System.out.println("Fim de Texto!");
-                                break;
-                            } 
-                            anterior = atual2;
-                            atual2 = texto.charAt(i);                        
+                            } else {
+                                if(atual2 == '\n') {
+                                    linha++;
+                                }
+                                i++; 
+                                // Verifica se chegou ao final da String
+                                if(i >= texto.length()) {
+                                    erros += "Erro na linha "+linha+" - Fecha comentario não encontrado!\n";
+                                    break;
+                                } 
+                                anterior = atual2;
+                                atual2 = texto.charAt(i); 
+                            }                                                   
                         }
                         System.out.println("Comentario de bloco ignorado!");
                     } else {
@@ -148,8 +149,7 @@ public class ControllerAnalisadorLexico {
                     palavra += Character.toString(atual2);
                     i++;                    
                     if(i >= texto.length()) {
-                        // Erro - Fim de Texto.
-                        System.out.println("Erro na linha "+linha+" - Fim de Texto!");
+                        erros += "Erro na linha "+linha+" - palavra não identificada!\n";
                         controleErro = false;
                         break;
                     } else {
@@ -191,8 +191,7 @@ public class ControllerAnalisadorLexico {
                     } 
                     // Verifica se chegou ao final da String
                     if(i >= texto.length()) {
-                        // Erro - Fecha aspas não encontrado.
-                        System.out.println("Erro na linha "+linha+" - Fecha aspas não encontrado!");
+                        erros += "Erro na linha "+linha+" - Fecha aspas não encontrado!\n";
                         controleErro = false;
                         break;
                     } else {
@@ -207,15 +206,18 @@ public class ControllerAnalisadorLexico {
                         System.out.println("Cadeia aceita!");
                     } else {
                         // Erro - Caractere invalido.
-                        System.out.println("Erro na linha "+linha+" - Caractere inválido!");  
+                        erros += "Erro na linha "+linha+" - Caractere inválido!\n";
                     }                      
                 }                           
             } else if(atual == '\n'){
                 // Incrementa o numero da linha. 
                 linha++;
+            } else if(atual != ' ' && atual != '\t') {
+                erros += "Erro na linha "+linha+" - Caractere inválido\n";
             }
             i++;        
         } while(i < texto.length());     
+        return erros;
     }
             
     public boolean palavrasReservadas(String palavra) {

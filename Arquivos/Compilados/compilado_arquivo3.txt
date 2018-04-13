@@ -1,0 +1,2 @@
+Erro na linha 1 - Caractere inválido
+Erro na linha 7 - Caractere inválido
