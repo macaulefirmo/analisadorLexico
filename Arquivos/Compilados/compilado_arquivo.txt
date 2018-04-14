@@ -1,1 +1,76 @@
-Erro na linha 40 - Fecha aspas não encontrado!
+--- TOKENS ---
+<Cadeia_de_Caracteres, (space) - 32, 1>
+<Delimitador, ;, 1>
+<Cadeia_de_Caracteres, ! - 33, 2>
+<Cadeia_de_Caracteres, # - 35, 3>
+<Delimitador, ;, 3>
+<Cadeia_de_Caracteres, $ - 36, 4>
+<Delimitador, ;, 4>
+<Cadeia_de_Caracteres, % - 37, 5>
+<Delimitador, ;, 5>
+<Cadeia_de_Caracteres, & - 38, 6>
+<Delimitador, ;, 6>
+<Cadeia_de_Caracteres, ' - 39, 7>
+<Delimitador, ;, 7>
+<Cadeia_de_Caracteres, ( - 40, 8>
+<Delimitador, ;, 8>
+<Cadeia_de_Caracteres, ) - 41, 9>
+<Delimitador, ;, 9>
+<Cadeia_de_Caracteres, * - 42, 10>
+<Delimitador, ;, 10>
+<Cadeia_de_Caracteres, + - 43, 11>
+<Delimitador, ;, 11>
+<Cadeia_de_Caracteres, , - 44, 12>
+<Delimitador, ;, 12>
+<Cadeia_de_Caracteres, - - 45, 13>
+<Delimitador, ;, 13>
+<Cadeia_de_Caracteres, . - 46, 14>
+<Delimitador, ;, 14>
+<Cadeia_de_Caracteres, / - 47, 15>
+<Delimitador, ;, 15>
+<Cadeia_de_Caracteres, 0123456789 - 48 a 57, 16>
+<Delimitador, ;, 16>
+<Cadeia_de_Caracteres, : - 58, 17>
+<Delimitador, ;, 17>
+<Cadeia_de_Caracteres, ; - 59, 18>
+<Delimitador, ;, 18>
+<Cadeia_de_Caracteres, < - 60, 19>
+<Delimitador, ;, 19>
+<Cadeia_de_Caracteres, = - 61, 20>
+<Delimitador, ;, 20>
+<Cadeia_de_Caracteres, > - 62, 21>
+<Delimitador, ;, 21>
+<Cadeia_de_Caracteres, ? - 63, 22>
+<Delimitador, ;, 22>
+<Cadeia_de_Caracteres, @ - 64, 23>
+<Delimitador, ;, 23>
+<Cadeia_de_Caracteres, ABCDEFGHIJKLMNOPQRSTUVXYWZ - 65 a 90, 24>
+<Delimitador, ;, 24>
+<Cadeia_de_Caracteres, [ - 91, 25>
+<Delimitador, ;, 25>
+<Cadeia_de_Caracteres, \ - 92, 26>
+<Delimitador, ;, 26>
+<Cadeia_de_Caracteres, ] - 93, 27>
+<Delimitador, ;, 27>
+<Cadeia_de_Caracteres, ^ - 94, 28>
+<Delimitador, ;, 28>
+<Cadeia_de_Caracteres, _ - 95, 29>
+<Delimitador, ;, 29>
+<Cadeia_de_Caracteres, ` - 96, 30>
+<Delimitador, ;, 30>
+<Cadeia_de_Caracteres, abcdefghijklmnopqrstuvxywz - 97 a 122, 31>
+<Delimitador, ;, 31>
+<Cadeia_de_Caracteres, { - 123, 32>
+<Delimitador, ;, 32>
+<Cadeia_de_Caracteres, | - 124, 33>
+<Delimitador, ;, 33>
+<Cadeia_de_Caracteres, } - 125, 34>
+<Delimitador, ;, 34>
+<Cadeia_de_Caracteres, ~ - 126, 35>
+<Delimitador, ;, 35>
+<Cadeia_de_Caracteres, Testando 1234 !RR#R ASF Aff, 36>
+<Delimitador, ;, 36>
+<Cadeia_de_Caracteres, aospf_ asifona6sf$&* *Eh naif*$FHn  (#R*#!(R n IAWFj83 n)# (@T n o@#T J@PT) JEQGOLOM )G , 37>
+<Delimitador, ;, 37>
+--- ERROS ---
+Erro na linha 38 - Caractere inválido!

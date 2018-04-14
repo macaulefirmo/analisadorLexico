@@ -1,0 +1,9 @@
+--- TOKENS ---
+<Identificador, i, 1>
+<Op.Relacional, =, 1>
+<Identificador, a, 1>
+<Op.Aritmetico, ++, 1>
+<Op.Aritmetico, +, 1>
+<Numero, -2, 1>
+<Delimitador, ;, 1>
+--- ERROS ---

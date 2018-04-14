@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Token;
 import persistencia.ManipulaArquivo;
 
 public class ControllerAnalisadorLexico {
@@ -10,14 +11,14 @@ public class ControllerAnalisadorLexico {
         for(int i=0; i<arquivos.length; i++) {
             String texto = ma.lerArquivo(arquivos[i]);
             if(!texto.isEmpty()) {
-                String erros = lerCaracteres(texto);
+                Token tokens = new Token();
+                String erros = lerCaracteres(texto, tokens);
                 String[] arrayS = arquivos[i].split("\\\\");
-                System.out.println("Erros: "+erros);
-                ma.salvaArquivo(erros, "Arquivos/Compilados/compilado_"+arrayS[1]);
+                ma.salvaArquivo(tokens.getTokens(), erros, "Arquivos/Compilados/compilado_"+arrayS[1]);
             }            
         }
     }
-    public String lerCaracteres(String texto){
+    public String lerCaracteres(String texto, Token tokens){
 
         int i = 0;
         int linha = 1;
@@ -30,56 +31,57 @@ public class ControllerAnalisadorLexico {
                 if(atual == '&') {
                     if(atual2 == '&') {
                         // &&
+                        tokens.criaToken("Op.Logico", "&&", linha);
                         i++;
                     } else {
-                        System.out.println("O.L.: "+atual);
+                        tokens.criaToken("Op.Logico", Character.toString(atual), linha);
                     }
                 } else if(atual == '|') {                    
                     if(atual2 == '|') {
-                        System.out.println("O.L.: ||");
+                        tokens.criaToken("Op.Logico", "||", linha);
                         i++;
                     } else {
-                        System.out.println("O.L.: "+atual);
+                        tokens.criaToken("Op.Logico", Character.toString(atual), linha);
                     }
                 }
             } else if(operadoresRelacionais(Character.toString(atual))){
                 int j = i+1;
                 char atual2 = texto.charAt(j);                
                 if(atual == '!') {
-                    if(atual2 == '=') {
-                        System.out.println("O.R.: !=");
+                    if(atual2 == '=') {                        
+                        tokens.criaToken("Op.Relacional", "!=", linha);
                         i++;
                     } else {
-                        System.out.println("O.L.: "+atual);
+                        tokens.criaToken("Op.Logico", Character.toString(atual), linha);
                     }
                 } else if(atual == '=') {
                     if(atual2 == '=') {
-                        System.out.println("O.R.: ==");
+                        tokens.criaToken("Op.Relacional", "==", linha);
                         i++;
                     } else {
-                        System.out.println("O.R.: "+atual);
+                        tokens.criaToken("Op.Relacional", Character.toString(atual), linha);
                     }
                 } else if(atual == '<') {
                     if(atual2 == '=') {
-                        System.out.println("O.R.: <=");
+                        tokens.criaToken("Op.Relacional", "<=", linha);
                         i++;
                     } else {
-                        System.out.println("O.R.: "+atual);
+                        tokens.criaToken("Op.Relacional", Character.toString(atual), linha);
                     }
                 } else if(atual == '>') {
                     if(atual2 == '=') {
-                        System.out.println("O.R.: >=");
+                        tokens.criaToken("Op.Relacional", ">=", linha);
                         i++;
                     } else {
-                        System.out.println("O.R.: "+atual);
+                        tokens.criaToken("Op.Relacional", Character.toString(atual), linha);
                     }
                 }
             } else if(delimitadores(Character.toString(atual))){
-                System.out.println("Delimitador: "+atual);
+                tokens.criaToken("Delimitador", Character.toString(atual), linha);
             } else if(operadoresAritmeticos(Character.toString(atual))) {
-                int j = i+1;
+                int j = (i+1);
                 char atual2 = texto.charAt(j);                                
-                if(atual == '/'){                    
+                if(atual == '/') {                    
                     // Verifica se eh um comentario de linha
                     if(atual2 == '/') {
                         while(atual2 != '\n') { 
@@ -114,55 +116,106 @@ public class ControllerAnalisadorLexico {
                                 atual2 = texto.charAt(i); 
                             }                                                   
                         }
-                        System.out.println("Comentario de bloco ignorado!");
                     } else {
                         // adiciona / ao token 
-                        System.out.println("OP.A.: /");
+                        tokens.criaToken("Op.Aritmetico", Character.toString(atual), linha);                        
                     }
                 } else if(atual == '+') {
                     if(atual2 == '+') {
-                        i++;
                         // adiciona ++ ao token
-                        System.out.println("OP.A.: ++");
+                        tokens.criaToken("Op.Aritmetico", "++", linha); 
+                        i++;
                     } else {
                         // adiciona + ao token
-                        System.out.println("OP.A.: +");
+                        tokens.criaToken("Op.Aritmetico", Character.toString(atual), linha);
                     }                    
                 } else if(atual == '-') {
                     if(atual2 == '-') {
-                        i++;
                         // adiciona -- ao token
-                        System.out.println("OP.A.: --");
+                        tokens.criaToken("Op.Aritmetico", "--", linha);  
+                        i++;
                     } else {
-                        // adiciona - ao token
-                        System.out.println("OP.A.: -");
+                        if(digito(Character.toString(atual2)) || espaco(Character.toString(atual2)) ) {
+                            while(espaco(Character.toString(atual2))){
+                                if(atual2 == '\n') {
+                                    linha++;
+                                }
+                                j++;
+                                if(j >= texto.length()) {                                
+                                    break;
+                                } 
+                                atual2 = texto.charAt(j);
+                            }
+                            if(digito(Character.toString(atual2))) {
+                                String numero = "-";
+                                while(digito(Character.toString(atual2))){                                
+                                    numero += Character.toString(atual2);
+                                    j++;
+                                    if(j >= texto.length()) {                                
+                                        break;
+                                    } 
+                                    atual2 = texto.charAt(j);
+                                }
+                                if(atual2 == '.') {
+                                    numero += Character.toString(atual2);
+                                    j++;
+                                    if(j < texto.length()) {                                
+                                        atual2 = texto.charAt(j);
+                                        if(digito(Character.toString(atual2))) {
+                                            while(digito(Character.toString(atual2))){                                
+                                                numero += Character.toString(atual2);
+                                                j++;
+                                                if(j >= texto.length()) {                                
+                                                    break;
+                                                } 
+                                                atual2 = texto.charAt(j);
+                                            }
+                                            tokens.criaToken("Numero", numero, linha);  
+                                            i = (j-1);
+                                        } else {
+                                            erros += "Erro na linha "+linha+" - Falta de dígito apos o '.'!\n";
+                                            i = (j-1);
+                                        } 
+                                    } else {
+                                        erros += "Erro na linha "+linha+" - Falta de dígito apos o '.'!\n";
+                                    }                                                                    
+                                } else {
+                                    tokens.criaToken("Numero", numero, linha);  
+                                    i = (j-1);
+                                }
+                            } else {
+                                // adiciona - ao token   
+                                tokens.criaToken("Op.Aritmetico", Character.toString(atual), linha);  
+                                i = j-1;
+                            }
+                        } else {
+                            // adiciona - ao token   
+                            tokens.criaToken("Op.Aritmetico", Character.toString(atual), linha);
+                        }                          
                     }
                 } else if(atual == '*') {
                     // Adiciona * ao token
-                    System.out.println("OP.A.: *");
+                    tokens.criaToken("Op.Aritmetico", Character.toString(atual), linha);       
                 }
             } else if(letra(Character.toString(atual))) {                
-                String palavra = "";
-                char atual2 = texto.charAt(i);
-                boolean controleErro = true;                  
+                String palavra = Character.toString(atual);
+                int j = (i+1);
+                char atual2 = texto.charAt(j);               
                 while(condicaoFinal(Character.toString(atual2))) { 
                     palavra += Character.toString(atual2);
-                    i++;                    
-                    if(i >= texto.length()) {
-                        erros += "Erro na linha "+linha+" - palavra não identificada!\n";
-                        controleErro = false;
+                    j++;                    
+                    if(j >= texto.length()) {
                         break;
                     } else {
-                        atual2 = texto.charAt(i);
+                        atual2 = texto.charAt(j);
                     }                                             
                 }
-                if(controleErro) {
-                    if(palavrasReservadas(palavra)) {
-                        System.out.println("Palavra Reservada: "+palavra);
-                    } else {
-                        System.out.println("Identificador: "+palavra);
-                    }
+                if(palavrasReservadas(palavra)) {
+                    tokens.criaToken("Palavra_Reservada", palavra, linha);       
+                } else {
+                    tokens.criaToken("Identificador", palavra, linha); 
                 }
+                i = (j-1);
             } else if(atual == '"') {   
                 // Inicio da cadeia de caracteres
                 i++;
@@ -199,18 +252,56 @@ public class ControllerAnalisadorLexico {
                     } 
                 }
                 // Verifica se houve erro.
-                if(controleErro) {
-                    System.out.println("Cadeia: "+cadeia);
+                if(controleErro) {                    
                     // Verifica a validade da cadeia de caracteres.
                     if(cadeiaDeCaracteres(cadeia)){                        
-                        System.out.println("Cadeia aceita!");
+                        tokens.criaToken("Cadeia_de_Caracteres", cadeia, linha); 
                     } else {
                         // Erro - Caractere invalido.
                         erros += "Erro na linha "+linha+" - Caractere inválido!\n";
                     }                      
                 }                           
+            } else if(digito(Character.toString(atual))) {
+                String numero = Character.toString(atual);
+                int j = (i+1);
+                char atual2 = texto.charAt(j); 
+                while(digito(Character.toString(atual2))){                                
+                    numero += Character.toString(atual2);
+                    j++;
+                    if(j >= texto.length()) {                                
+                        break;
+                    } 
+                    atual2 = texto.charAt(j);
+                }
+                if(atual2 == '.') {
+                    numero += Character.toString(atual2);
+                    j++;
+                    if(j < texto.length()) {                                
+                        atual2 = texto.charAt(j);
+                        if(digito(Character.toString(atual2))) {
+                            while(digito(Character.toString(atual2))){                                
+                                numero += Character.toString(atual2);
+                                j++;
+                                if(j >= texto.length()) {                                
+                                    break;
+                                } 
+                                atual2 = texto.charAt(j);
+                            }
+                            tokens.criaToken("Numero", numero, linha);  
+                            i = (j-1);
+                        } else {
+                            erros += "Erro na linha "+linha+" - Falta de dígito apos o '.'!\n";
+                            i = (j-1);
+                        } 
+                    } else {
+                        erros += "Erro na linha "+linha+" - Falta de dígito apos o '.'!\n";
+                    }                                                                    
+                } else {
+                    tokens.criaToken("Numero", numero, linha);  
+                    i = (j-1);
+                }
             } else if(atual == '\n'){
-                // Incrementa o numero da linha. 
+                // Incrementa o numero da linhas. 
                 linha++;
             } else if(atual != ' ' && atual != '\t') {
                 erros += "Erro na linha "+linha+" - Caractere inválido\n";
@@ -307,7 +398,15 @@ public class ControllerAnalisadorLexico {
         return caractere.matches("[a-z|A-Z|0-9|_]*");
     }
     
-    public boolean letra(String letra){
-        return letra.matches("[a-z|A-Z]"); 
+    public boolean letra(String caractere){
+        return caractere.matches("[a-z|A-Z]"); 
+    }
+    
+    public boolean espaco(String caractere) {
+        return caractere.matches("[\t|\n|\r| ]"); 
+    }
+    
+    public boolean digito(String caractere) {
+        return caractere.matches("[0-9]"); 
     }
 }

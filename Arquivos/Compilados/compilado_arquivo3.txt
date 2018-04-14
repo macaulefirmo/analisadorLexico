@@ -1,2 +1,30 @@
-Erro na linha 1 - Caractere inválido
+--- TOKENS ---
+<Palavra_Reservada, if, 1>
+<Delimitador, (, 1>
+<Identificador, contador, 1>
+<Op.Relacional, ==, 1>
+<Numero, 1, 1>
+<Delimitador, ), 1>
+<Delimitador, {, 1>
+<Op.Relacional, !=, 2>
+<Op.Relacional, ==, 2>
+<Op.Relacional, <, 2>
+<Op.Relacional, <=, 2>
+<Op.Relacional, >, 2>
+<Op.Relacional, >=, 2>
+<Op.Relacional, =, 2>
+<Op.Logico, !, 3>
+<Op.Logico, &&, 3>
+<Op.Logico, ||, 3>
+<Delimitador, ;, 4>
+<Delimitador, ,, 4>
+<Delimitador, (, 4>
+<Delimitador, ), 4>
+<Delimitador, [, 4>
+<Delimitador, ], 4>
+<Delimitador, {, 4>
+<Delimitador, }, 4>
+<Delimitador, ., 4>
+<Delimitador, }, 5>
+--- ERROS ---
 Erro na linha 7 - Caractere inválido

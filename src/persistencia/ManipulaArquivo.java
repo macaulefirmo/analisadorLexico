@@ -48,7 +48,7 @@ public class ManipulaArquivo {
         }        
     } 
     
-    public boolean salvaArquivo(String texto, String nomeArquivo) {
+    public boolean salvaArquivo(String tokens, String texto, String nomeArquivo) {
         
         try{
             File file = new File(nomeArquivo);       
@@ -58,6 +58,17 @@ public class ManipulaArquivo {
             FileWriter fileWriter = new FileWriter(file);        
             BufferedWriter bw = new BufferedWriter(fileWriter);
             
+            bw.write("--- TOKENS ---");
+            bw.newLine ();
+            for(int i=0; i<tokens.length(); i++){
+                if(tokens.charAt(i) == '\n'){
+                    bw.newLine ();
+                } else {
+                    bw.write(tokens.charAt(i));
+                }                
+            }
+            bw.write("--- ERROS ---");
+            bw.newLine ();
             for(int i=0; i<texto.length(); i++){
                 if(texto.charAt(i) == '\n'){
                     bw.newLine ();
@@ -66,7 +77,6 @@ public class ManipulaArquivo {
                 }                
             }
             
-
             bw.close();
             return true;
         } catch(IOException e) {
