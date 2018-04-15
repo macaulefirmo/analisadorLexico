@@ -1,7 +1,7 @@
 --- TOKENS ---
-<Identificador, i, 1>
+<id_1, i, 1>
 <Op.Relacional, =, 1>
-<Identificador, a, 1>
+<id_2, a, 1>
 <Op.Aritmetico, ++, 1>
 <Op.Aritmetico, +, 1>
 <Numero, -2, 1>

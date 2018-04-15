@@ -1,0 +1,11 @@
+--- TOKENS ---
+<Cadeia_de_Caracteres, ", 1>
+<Delimitador, ;, 1>
+<Op.Logico, !, 2>
+<Delimitador, [, 2>
+<Delimitador, ], 2>
+<Delimitador, ,, 2>
+<Delimitador, ;, 2>
+<Cadeia_de_Caracteres,  \ , 3>
+--- ERROS ---
+Erro entre as linhas 3 e 12 - Fecha aspas não encontrado!

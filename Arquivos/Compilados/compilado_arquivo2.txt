@@ -11,4 +11,4 @@
 <Delimitador, ;, 8>
 <Delimitador, ;, 14>
 --- ERROS ---
-Erro na linha 14 - Caractere inválido!
+Erro na linha 14 - Cadeia de caracteres inválida!

@@ -73,4 +73,4 @@
 <Cadeia_de_Caracteres, aospf_ asifona6sf$&* *Eh naif*$FHn  (#R*#!(R n IAWFj83 n)# (@T n o@#T J@PT) JEQGOLOM )G , 37>
 <Delimitador, ;, 37>
 --- ERROS ---
-Erro na linha 38 - Caractere inválido!
+Erro na linha 38 - Cadeia de caracteres inválida!

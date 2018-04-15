@@ -1,0 +1,17 @@
+--- TOKENS ---
+<id_1, ab, 1>
+<Delimitador, ;, 5>
+<id_2, adfg, 7>
+<Delimitador, ;, 7>
+<Numero, 1, 8>
+<id_3, abcd, 8>
+<Delimitador, ;, 8>
+<Delimitador, ., 9>
+<id_3, abcd, 9>
+<Delimitador, ;, 9>
+<id_3, abcd, 10>
+<Delimitador, ;, 10>
+--- ERROS ---
+Erro entre as linhas 1 e 5 - Cadeia de caracteres inválida!
+Erro entre as linhas 6 e 7 - Cadeia de caracteres inválida!
+Erro na linha 10 - Caractere inválido
