@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ab" cd.ef;
 ab@cd;
 a12__34@.\][;
@@ -8,3 +9,15 @@ a12__34@.\][;
 1abcd;
 .abcd;
 _abcd;
+=======
+ab" cd.ef;
+ab@cd;
+a12___34@.\][;
+12; 
+'asass";
+"asasa';
+"adfg;
+1abcd;
+.abcd;
+_abcd;
+>>>>>>> 4ac1828e9f13ec666a10020bb203eba3f7c78b53
