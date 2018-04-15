@@ -1,1 +1,15 @@
-i = a++ + -     2;
+/*
+* Função marota.
+*/
+function myFunction(int a, int b, string texto) {
+
+	i = a++ + -     2;
+	// Comentario de linha
+	bool chave = true;
+	while(chave) {
+		if(i > 10) {
+			chave = false;		
+		}
+		i++;
+	}
+}

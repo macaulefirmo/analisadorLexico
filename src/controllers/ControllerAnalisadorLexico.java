@@ -1,6 +1,5 @@
 package controllers;
 
-import models.Simbolo;
 import models.TabelaSimbolo;
 import models.Token;
 import persistencia.ManipulaArquivo;
@@ -12,12 +11,14 @@ public class ControllerAnalisadorLexico {
         String[] arquivos = ma.getArquivos();
         for(int i=0; i<arquivos.length; i++) {
             String texto = ma.lerArquivo(arquivos[i]);
+            String[] arrayS = arquivos[i].split("\\\\");
+            System.out.println("Compilando arquivo \""+arrayS[1]+"\" ...");
             if(!texto.isEmpty()) {
                 Token tokens = new Token();
                 TabelaSimbolo simbolos = new TabelaSimbolo();
-                String erros = lerCaracteres(texto, tokens, simbolos);
-                String[] arrayS = arquivos[i].split("\\\\");
+                String erros = lerCaracteres(texto, tokens, simbolos);                
                 ma.salvaArquivo(tokens.getTokens(), erros, "Arquivos/Compilados/compilado_"+arrayS[1]);
+                System.out.println("Arquivo compilado com sucesso!");
             }            
         }
     }

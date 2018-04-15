@@ -42,7 +42,7 @@ public class TabelaSimbolo {
     }
     
     public String addSimbolo(String valor) {
-        String nome = "id_"+this.contador;
+        String nome = "Identificador_"+this.contador;
         this.contador++;
         this.simbolos.add(new Simbolo(nome, valor));
         return nome;

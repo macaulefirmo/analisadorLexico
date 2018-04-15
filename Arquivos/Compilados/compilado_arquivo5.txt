@@ -1,17 +1,53 @@
 --- TOKENS ---
-<id_1, ab, 1>
-<Delimitador, ;, 5>
-<id_2, adfg, 7>
-<Delimitador, ;, 7>
-<Numero, 1, 8>
-<id_3, abcd, 8>
+<Op.Relacional, <, 1>
+<Op.Relacional, <, 1>
+<Op.Relacional, <, 1>
+<Op.Relacional, <, 1>
+<Op.Relacional, <, 1>
+<Op.Relacional, <, 1>
+<Op.Relacional, <, 1>
+<Identificador_1, HEAD, 1>
+<Identificador_2, ab, 2>
+<Delimitador, ;, 6>
+<Identificador_3, adfg, 8>
 <Delimitador, ;, 8>
-<Delimitador, ., 9>
-<id_3, abcd, 9>
+<Numero, 1, 9>
+<Identificador_4, abcd, 9>
 <Delimitador, ;, 9>
-<id_3, abcd, 10>
+<Delimitador, ., 10>
+<Identificador_4, abcd, 10>
 <Delimitador, ;, 10>
+<Identificador_4, abcd, 11>
+<Delimitador, ;, 11>
+<Op.Relacional, ==, 12>
+<Op.Relacional, ==, 12>
+<Op.Relacional, ==, 12>
+<Op.Relacional, =, 12>
+<Identificador_2, ab, 13>
+<Delimitador, ;, 17>
+<Identificador_3, adfg, 19>
+<Delimitador, ;, 19>
+<Numero, 1, 20>
+<Identificador_4, abcd, 20>
+<Delimitador, ;, 20>
+<Delimitador, ., 21>
+<Identificador_4, abcd, 21>
+<Delimitador, ;, 21>
+<Identificador_4, abcd, 22>
+<Delimitador, ;, 22>
+<Op.Relacional, >, 23>
+<Op.Relacional, >, 23>
+<Op.Relacional, >, 23>
+<Op.Relacional, >, 23>
+<Op.Relacional, >, 23>
+<Op.Relacional, >, 23>
+<Op.Relacional, >, 23>
+<Numero, 4, 23>
+<Identificador_5, ac1828e9f13ec666a10020bb203eba3f7c78b53, 23>
 --- ERROS ---
-Erro entre as linhas 1 e 5 - Cadeia de caracteres inválida!
-Erro entre as linhas 6 e 7 - Cadeia de caracteres inválida!
-Erro na linha 10 - Caractere inválido
+Erro entre as linhas 2 e 6 - Cadeia de caracteres inválida!
+Erro entre as linhas 7 e 8 - Cadeia de caracteres inválida!
+Erro na linha 11 - Caractere inválido
+Erro entre as linhas 13 e 17 - Cadeia de caracteres inválida!
+Erro entre as linhas 18 e 19 - Cadeia de caracteres inválida!
+Erro na linha 22 - Caractere inválido
