@@ -1,0 +1,4 @@
+--- TOKENS ---
+<Cadeia_de_Caracteres,  \ , 1>
+--- ERROS ---
+Erro na linha 10 - Fecha aspas não encontrado!

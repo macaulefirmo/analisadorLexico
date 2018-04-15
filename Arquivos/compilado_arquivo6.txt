@@ -1,0 +1,9 @@
+--- TOKENS ---
+<Numero, 1, 6>
+<Delimitador, ;, 6>
+<Identificador, abc1_, 7>
+<Delimitador, ;, 7>
+<Identificador, a1b2c3_4, 8>
+<Delimitador, ;, 8>
+--- ERROS ---
+Erro na linha 8 - Caractere inválido
