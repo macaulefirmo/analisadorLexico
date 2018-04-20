@@ -4,9 +4,11 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class ManipulaArquivo {
     
@@ -31,9 +33,13 @@ public class ManipulaArquivo {
         
         try {
             
-            FileReader fileReader = new FileReader(nomeArquivo);
-            BufferedReader br = new BufferedReader(fileReader);            
+            File file = new File(nomeArquivo);
+            InputStreamReader r = new InputStreamReader(new FileInputStream(file));
+            System.out.print(r.getEncoding()+" - ");            
             
+            FileReader fileReader = new FileReader(nomeArquivo);
+            BufferedReader br = new BufferedReader(fileReader);      
+                        
             String texto = ""; 
             String linha = br.readLine();           
             while(linha != null){                

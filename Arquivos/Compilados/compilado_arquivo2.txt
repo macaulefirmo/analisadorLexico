@@ -1,14 +1,14 @@
 --- TOKENS ---
 <Op.Aritmetico, +, 1>
 <Op.Aritmetico, -, 3>
-<Op.Aritmetico, *, 3>
-<Op.Aritmetico, /, 4>
-<Op.Aritmetico, ++, 5>
-<Op.Aritmetico, --, 6>
-<Op.Aritmetico, +, 6>
-<Op.Aritmetico, -, 7>
-<Cadeia_de_Caracteres, Testando 123 ... "Assim Funciona" , 8>
-<Delimitador, ;, 8>
-<Delimitador, ;, 14>
+<Op.Aritmetico, *, 4>
+<Op.Aritmetico, /, 5>
+<Op.Aritmetico, ++, 6>
+<Op.Aritmetico, --, 7>
+<Op.Aritmetico, +, 7>
+<Op.Aritmetico, -, 8>
+<Cadeia_de_Caracteres, Testando 123 ... "Assim Funciona" , 10>
+<Delimitador, ;, 10>
+<Delimitador, ;, 16>
 --- ERROS ---
-Erro na linha 14 - Cadeia de caracteres inválida!
+Erro na linha 16 - Cadeia de caracteres inválida!

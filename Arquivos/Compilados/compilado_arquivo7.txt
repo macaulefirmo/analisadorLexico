@@ -1,0 +1,19 @@
+--- TOKENS ---
+<Identificador_1, exemplo, 1>
+<Identificador_2, teste, 1>
+<Delimitador, ;, 1>
+<Palavra_Reservada, float, 1>
+<Identificador_3, f, 1>
+<Op.Relacional, =, 1>
+<Numero, 3, 1>
+<Identificador_4, a, 1>
+<Op.Aritmetico, +, 1>
+<Delimitador, ;, 1>
+<Palavra_Reservada, string, 1>
+<Identificador_5, msg, 1>
+<Op.Relacional, =, 1>
+<Cadeia_de_Caracteres, testeif ( f >= -10) && (f < ) print(, 1>
+<Identificador_6, mensagem, 1>
+<Delimitador, ), 1>
+<Delimitador, ;, 1>
+--- ERROS ---

@@ -1,7 +1,19 @@
-if (contador == 1) {
-	!= == < <= > >= =
-	! && ||
-	; , ( ) [ ] { } .
-}
-
-@
+int soma = 1 + 2; // 1
+int soma1 = 3 - 2; // 2
+int soma2 = -3 + -3; // 3
+int soma3 = -3 - -3; // 4
+int soma4 = soma++ -- - 5; // 5
+int soma5 = soma1 / soma2 + soma3 - soma4; // 6
+int soma6 = 5 * 3 - 4 * -3 / - 4 * 5 + 2; // 7
+float teste = - 14447. + 12346.123; // 8
+teste = teste - 123.; // 9
+i = a++ +  -     2; // 10
+ax = (3 + 4) - 3; // 11
+a = 7 * 4/-2; // 12
+bx = aaa[0] - 2; // 13
+function as(){} - 5; // 14
+somador(-5, 4, -3); // 15
+5 + (-3); // 16
+(3-1) - 4 // 17
+5 - - - 4; // 18
+soma   -- -  6; // 19

@@ -1,0 +1,21 @@
+--- TOKENS ---
+<Identificador_1, exemplo, 1>
+<Identificador_2, teste, 1>
+<Delimitador, ;, 1>
+<Palavra_Reservada, float, 2>
+<Identificador_3, f, 2>
+<Op.Relacional, =, 2>
+<Numero, 3, 2>
+<Identificador_4, a, 2>
+<Op.Aritmetico, +, 2>
+<Delimitador, ;, 2>
+<Palavra_Reservada, string, 3>
+<Identificador_5, msg, 3>
+<Op.Relacional, =, 3>
+<Identificador_6, mensagem, 5>
+<Delimitador, ), 5>
+<Delimitador, ;, 5>
+--- ERROS ---
+Erro na linha 1 - Caractere inválido
+Erro entre as linhas 3 e 5 - Cadeia de caracteres inválida!
+Erro na linha 8 - Fecha comentario não encontrado!

@@ -22,11 +22,13 @@ public class ControllerAnalisadorLexico {
             }            
         }
     }
+    
     public String lerCaracteres(String texto, Token tokens, TabelaSimbolo simbolos){
 
         int i = 0;
         int linha = 1;
         String erros = "";
+        String anterior = "";
         do {
             char atual = texto.charAt(i);                                 
             if(operadoresLogicos(Character.toString(atual))){
@@ -36,16 +38,20 @@ public class ControllerAnalisadorLexico {
                     if(atual2 == '&') {
                         // &&
                         tokens.addToken("Op.Logico", "&&", linha);
+                        anterior = "&&";
                         i++;
                     } else {
                         tokens.addToken("Op.Logico", Character.toString(atual), linha);
+                        anterior = Character.toString(atual);
                     }
                 } else if(atual == '|') {                    
                     if(atual2 == '|') {
                         tokens.addToken("Op.Logico", "||", linha);
+                        anterior = "||";
                         i++;
                     } else {
                         tokens.addToken("Op.Logico", Character.toString(atual), linha);
+                        anterior = Character.toString(atual);
                     }
                 }
             } else if(operadoresRelacionais(Character.toString(atual))){
@@ -54,34 +60,43 @@ public class ControllerAnalisadorLexico {
                 if(atual == '!') {
                     if(atual2 == '=') {                        
                         tokens.addToken("Op.Relacional", "!=", linha);
+                        anterior = "!=";
                         i++;
                     } else {
                         tokens.addToken("Op.Logico", Character.toString(atual), linha);
+                        anterior = Character.toString(atual);
                     }
                 } else if(atual == '=') {
                     if(atual2 == '=') {
                         tokens.addToken("Op.Relacional", "==", linha);
+                        anterior = "==";
                         i++;
                     } else {
                         tokens.addToken("Op.Relacional", Character.toString(atual), linha);
+                        anterior = Character.toString(atual);
                     }
                 } else if(atual == '<') {
                     if(atual2 == '=') {
                         tokens.addToken("Op.Relacional", "<=", linha);
+                        anterior = "<=";
                         i++;
                     } else {
                         tokens.addToken("Op.Relacional", Character.toString(atual), linha);
+                        anterior = Character.toString(atual);
                     }
                 } else if(atual == '>') {
                     if(atual2 == '=') {
                         tokens.addToken("Op.Relacional", ">=", linha);
+                        anterior = ">=";
                         i++;
                     } else {
                         tokens.addToken("Op.Relacional", Character.toString(atual), linha);
+                        anterior = Character.toString(atual);
                     }
                 }
             } else if(delimitadores(Character.toString(atual))){
                 tokens.addToken("Delimitador", Character.toString(atual), linha);
+                anterior = Character.toString(atual);
             } else if(operadoresAritmeticos(Character.toString(atual))) {
                 int j = (i+1);
                 char atual2 = texto.charAt(j);                                
@@ -100,10 +115,10 @@ public class ControllerAnalisadorLexico {
                         linha++;  
                     // Verifica se eh um Comentario de Bloco    
                     } else if (atual2 == '*') {                        
-                        char anterior = 'x';
+                        char anterior2 = '§';
                         boolean chave = true;
                         while(chave) { 
-                            if(anterior == '*' && atual2 == '/'){
+                            if(anterior2 == '*' && atual2 == '/'){
                                 chave = false;                                
                             } else {
                                 if(atual2 == '\n') {
@@ -115,90 +130,101 @@ public class ControllerAnalisadorLexico {
                                     erros += "Erro na linha "+linha+" - Fecha comentario não encontrado!\n";
                                     break;
                                 } 
-                                anterior = atual2;
+                                anterior2 = atual2;
                                 atual2 = texto.charAt(i); 
                             }                                                   
                         }
                     } else {
                         // adiciona / ao token 
-                        tokens.addToken("Op.Aritmetico", Character.toString(atual), linha);                        
+                        tokens.addToken("Op.Aritmetico", Character.toString(atual), linha); 
+                        anterior = Character.toString(atual);
                     }
                 } else if(atual == '+') {
                     if(atual2 == '+') {
                         // adiciona ++ ao token
                         tokens.addToken("Op.Aritmetico", "++", linha); 
+                        anterior = "++";
                         i++;
                     } else {
                         // adiciona + ao token
                         tokens.addToken("Op.Aritmetico", Character.toString(atual), linha);
+                        anterior = Character.toString(atual);
                     }                    
                 } else if(atual == '-') {
                     if(atual2 == '-') {
                         // adiciona -- ao token
-                        tokens.addToken("Op.Aritmetico", "--", linha);  
+                        tokens.addToken("Op.Aritmetico", "--", linha); 
+                        anterior = "--";
                         i++;
                     } else {
-                        if(digito(Character.toString(atual2)) || espaco(Character.toString(atual2)) ) {
-                            while(espaco(Character.toString(atual2))){
-                                if(atual2 == '\n') {
-                                    linha++;
-                                }
+                        // Avança os espaços
+                        while(espaco(Character.toString(atual2))){
+                            if(atual2 == '\n') {
+                                linha++;
+                            }
+                            j++;
+                            if(j >= texto.length()) {                                
+                                break;
+                            } 
+                            atual2 = texto.charAt(j);
+                        } 
+                        if(digito(Character.toString(atual2))) {
+                            String numero = "";
+                            if(verificaAnterior(anterior)) {
+                                 numero += "-";
+                            } else {
+                                tokens.addToken("Op.Aritmetico", Character.toString(atual), linha);
+                            } 
+                            while(digito(Character.toString(atual2))){                                
+                                numero += Character.toString(atual2);
                                 j++;
                                 if(j >= texto.length()) {                                
                                     break;
                                 } 
                                 atual2 = texto.charAt(j);
                             }
-                            if(digito(Character.toString(atual2))) {
-                                String numero = "-";
-                                while(digito(Character.toString(atual2))){                                
-                                    numero += Character.toString(atual2);
-                                    j++;
-                                    if(j >= texto.length()) {                                
-                                        break;
-                                    } 
+                            if(atual2 == '.') {                                    
+                                j++;
+                                if(j < texto.length()) { 
                                     atual2 = texto.charAt(j);
-                                }
-                                if(atual2 == '.') {
-                                    numero += Character.toString(atual2);
-                                    j++;
-                                    if(j < texto.length()) {                                
-                                        atual2 = texto.charAt(j);
-                                        if(digito(Character.toString(atual2))) {
-                                            while(digito(Character.toString(atual2))){                                
-                                                numero += Character.toString(atual2);
-                                                j++;
-                                                if(j >= texto.length()) {                                
-                                                    break;
-                                                } 
-                                                atual2 = texto.charAt(j);
-                                            }
-                                            tokens.addToken("Numero", numero, linha);  
-                                            i = (j-1);
-                                        } else {
-                                            erros += "Erro na linha "+linha+" - Falta de dígito apos o '.'!\n";
-                                            i = (j-1);
-                                        } 
+                                    if(digito(Character.toString(atual2))) {
+                                        numero += ".";
+                                        while(digito(Character.toString(atual2))){                                
+                                            numero += Character.toString(atual2);
+                                            j++;
+                                            if(j >= texto.length()) {                                
+                                                break;
+                                            } 
+                                            atual2 = texto.charAt(j);
+                                        }
+                                        tokens.addToken("Numero", numero, linha);  
+                                        anterior = numero;
+                                        i = (j-1);
                                     } else {
-                                        erros += "Erro na linha "+linha+" - Falta de dígito apos o '.'!\n";
-                                    }                                                                    
+                                        tokens.addToken("Numero", numero, linha); 
+                                        anterior = numero;
+                                        i = (j-2);
+                                    } 
                                 } else {
-                                    tokens.addToken("Numero", numero, linha);  
-                                    i = (j-1);
-                                }
+                                    tokens.addToken("Numero", numero, linha); 
+                                    anterior = numero;
+                                    i = (j-2);
+                                }                                                                    
                             } else {
-                                // adiciona - ao token   
-                                tokens.addToken("Op.Aritmetico", Character.toString(atual), linha);  
-                                i = j-1;
-                            }
+                                tokens.addToken("Numero", numero, linha);  
+                                anterior = numero;
+                                i = (j-1);
+                            }                            
                         } else {
                             // adiciona - ao token   
                             tokens.addToken("Op.Aritmetico", Character.toString(atual), linha);
+                            anterior = Character.toString(atual);
                         }                          
                     }
                 } else if(atual == '*') {
                     // Adiciona * ao token
-                    tokens.addToken("Op.Aritmetico", Character.toString(atual), linha);       
+                    tokens.addToken("Op.Aritmetico", Character.toString(atual), linha);  
+                    anterior = Character.toString(atual);
                 }
             } else if(letra(Character.toString(atual))) {                
                 String palavra = Character.toString(atual);
@@ -214,7 +240,8 @@ public class ControllerAnalisadorLexico {
                     }                                             
                 }
                 if(palavrasReservadas(palavra)) {
-                    tokens.addToken("Palavra_Reservada", palavra, linha);       
+                    tokens.addToken("Palavra_Reservada", palavra, linha);  
+                    anterior = palavra;
                 } else {      
                     String nome;
                     if(simbolos.contem(palavra)) {
@@ -222,7 +249,8 @@ public class ControllerAnalisadorLexico {
                     } else {
                         nome = simbolos.addSimbolo(palavra);
                     }
-                    tokens.addToken(nome, palavra, linha);                     
+                    tokens.addToken(nome, palavra, linha);     
+                    anterior = nome;
                 }
                 i = (j-1);
             } else if(atual == '"') {   
@@ -269,6 +297,7 @@ public class ControllerAnalisadorLexico {
                    // Verifica a validade da cadeia de caracteres.
                     if(cadeiaDeCaracteres(cadeia)){                        
                         tokens.addToken("Cadeia_de_Caracteres", cadeia, linha); 
+                        anterior = cadeia;
                     } else {
                         if(linhaInicial == linha) {
                             erros += "Erro na linha "+linha+" - Cadeia de caracteres inválida!\n";
@@ -289,12 +318,12 @@ public class ControllerAnalisadorLexico {
                     } 
                     atual2 = texto.charAt(j);
                 }
-                if(atual2 == '.') {
-                    numero += Character.toString(atual2);
+                if(atual2 == '.') {                    
                     j++;
-                    if(j < texto.length()) {                                
-                        atual2 = texto.charAt(j);
+                    if(j < texto.length()) {  
+                        atual2 = texto.charAt(j);                        
                         if(digito(Character.toString(atual2))) {
+                            numero += ".";                            
                             while(digito(Character.toString(atual2))){                                
                                 numero += Character.toString(atual2);
                                 j++;
@@ -304,16 +333,21 @@ public class ControllerAnalisadorLexico {
                                 atual2 = texto.charAt(j);
                             }
                             tokens.addToken("Numero", numero, linha);  
+                            anterior = numero;
                             i = (j-1);
                         } else {
-                            erros += "Erro na linha "+linha+" - Falta de dígito apos o '.'!\n";
-                            i = (j-1);
+                            tokens.addToken("Numero", numero, linha); 
+                            anterior = numero;
+                            i = (j-2);
                         } 
                     } else {
-                        erros += "Erro na linha "+linha+" - Falta de dígito apos o '.'!\n";
+                        tokens.addToken("Numero", numero, linha); 
+                        anterior = numero;
+                        i = (j-2);
                     }                                                                    
                 } else {
                     tokens.addToken("Numero", numero, linha);  
+                    anterior = numero;
                     i = (j-1);
                 }
             } else if(atual == '\n'){
@@ -380,7 +414,7 @@ public class ControllerAnalisadorLexico {
     }
     
     public boolean operadoresRelacionais(String caractere) {
-        return caractere.matches("[!|=|<|>|]");
+        return caractere.matches("[!|=|<|>]");
     }
     
     public boolean operadoresLogicos(String caractere) {
@@ -424,5 +458,9 @@ public class ControllerAnalisadorLexico {
     
     public boolean digito(String caractere) {
         return caractere.matches("[0-9]"); 
+    }
+    
+    public boolean verificaAnterior(String anterior) {
+        return anterior.matches("[!|=|<|>|\\+|\\-|\\*|/|\\(|,]");
     }
 }

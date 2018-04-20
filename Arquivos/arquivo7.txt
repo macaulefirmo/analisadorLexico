@@ -1,0 +1,1 @@
+exemplo teste;float f = 3a+;string msg = "testeif ( f >= -10) && (f < ) print("mensagem );// exemplo de teste do lexico/* exa869 mi processadores de linguagem de programacao
