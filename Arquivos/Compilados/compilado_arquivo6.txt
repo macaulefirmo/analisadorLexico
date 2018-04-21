@@ -50,4 +50,4 @@ Erro na linha 9 - Caractere inválido
 Erro na linha 10 - Caractere inválido
 Erro na linha 10 - Caractere inválido
 Erro na linha 10 - Caractere inválido
-Erro entre as linhas 10 e 12 - Fecha aspas não encontrado!
+Erro na linha 11 - Fecha aspas não encontrado!

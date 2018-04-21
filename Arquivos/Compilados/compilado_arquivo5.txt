@@ -19,4 +19,4 @@ Erro na linha 2 - Caractere inválido
 Erro na linha 4 - Caractere inválido
 Erro entre as linhas 4 e 5 - Cadeia de caracteres inválida!
 Erro na linha 5 - Caractere inválido
-Erro entre as linhas 6 e 10 - Fecha aspas não encontrado!
+Erro na linha 9 - Fecha aspas não encontrado!

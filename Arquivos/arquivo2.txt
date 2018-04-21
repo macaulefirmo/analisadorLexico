@@ -11,4 +11,3 @@ Comentario de bloco
 ae
 heheheh
 */
-"Assim não funciona";

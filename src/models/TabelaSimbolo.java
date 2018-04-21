@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 public class TabelaSimbolo {
 
+    // Lista de Simbolos.
     private ArrayList<Simbolo> simbolos;
+    // Conta o numero de simbolos adicionados.
     private int contador;
 
     public TabelaSimbolo() {
@@ -12,6 +14,11 @@ public class TabelaSimbolo {
         this.simbolos = new ArrayList();
     }
     
+    /**
+     * Verifica se o valor recebido contem na lista.
+     * @param valor String
+     * @return 
+     */
     public boolean contem(String valor) {
         
         if(this.simbolos.isEmpty()) {
@@ -27,6 +34,11 @@ public class TabelaSimbolo {
         return false;
     }
     
+    /**
+     * Retorna o nome referente ao valor recebido.
+     * @param valor String
+     * @return 
+     */
     public String getNomeSimbolo(String valor) {
         if(this.simbolos.isEmpty()) {
             return null;
@@ -41,6 +53,11 @@ public class TabelaSimbolo {
         return null;
     }
     
+    /**
+     * Adiciona um novo Simbolo a lista.
+     * @param valor String
+     * @return 
+     */
     public String addSimbolo(String valor) {
         String nome = "Identificador_"+this.contador;
         this.contador++;

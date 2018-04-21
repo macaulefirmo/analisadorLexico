@@ -12,6 +12,10 @@ import java.io.InputStreamReader;
 
 public class ManipulaArquivo {
     
+    /**
+     * Obtem todos os arquivos .txt da pasta Arquivos.
+     * @return 
+     */
     public String[] getArquivos() {
         FileFilter filter = new FileFilter() {
             @Override
@@ -29,6 +33,11 @@ public class ManipulaArquivo {
         return arquivos;
     }
     
+    /**
+     * Obtem o conteudo do Arquivo.
+     * @param nomeArquivo String
+     * @return 
+     */
     public String lerArquivo(String nomeArquivo) {
         
         try {
@@ -54,6 +63,13 @@ public class ManipulaArquivo {
         }        
     } 
     
+    /**
+     * Adiciona um conteudo a um arquivo.
+     * @param tokens String
+     * @param texto String
+     * @param nomeArquivo String
+     * @return 
+     */
     public boolean salvaArquivo(String tokens, String texto, String nomeArquivo) {
         
         try{
