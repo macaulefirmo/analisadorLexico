@@ -65,12 +65,12 @@ public class ManipulaArquivo {
     
     /**
      * Adiciona um conteudo a um arquivo.
-     * @param tokens String
-     * @param texto String
+     * @param errosLexicos String
+     * @param errosSintaticos String
      * @param nomeArquivo String
      * @return 
      */
-    public boolean salvaArquivo(String tokens, String texto, String nomeArquivo) {
+    public boolean salvaArquivo(String errosLexicos, String errosSintaticos, String nomeArquivo) {
         
         try{
             File file = new File(nomeArquivo);       
@@ -80,30 +80,73 @@ public class ManipulaArquivo {
             FileWriter fileWriter = new FileWriter(file);        
             BufferedWriter bw = new BufferedWriter(fileWriter);
             
-            bw.write("--- TOKENS ---");
-            bw.newLine ();
-            for(int i=0; i<tokens.length(); i++){
-                if(tokens.charAt(i) == '\n'){
-                    bw.newLine ();
-                } else {
-                    bw.write(tokens.charAt(i));
-                }                
-            }
-            bw.write("--- ERROS ---");
-            bw.newLine ();
-            for(int i=0; i<texto.length(); i++){
-                if(texto.charAt(i) == '\n'){
-                    bw.newLine ();
-                } else {
-                    bw.write(texto.charAt(i));
-                }                
+            bw.write("** ARQUIVO COMPILADO COM SUCESSO! **");
+            bw.newLine();
+                        
+            if(!errosLexicos.isEmpty()) {
+                bw.newLine();
+                bw.write("--- ERROS LÉXICOS ---");
+                bw.newLine ();
+                for(int i=0; i<errosLexicos.length(); i++){
+                    if(errosLexicos.charAt(i) == '\n'){
+                        bw.newLine ();
+                    } else {
+                        bw.write(errosLexicos.charAt(i));
+                    }                
+                }
+            } else {
+                bw.newLine();
+                bw.write("--- ERROS LÉXICOS ---");
+                bw.newLine ();
+                bw.write("Não foram encontrados erros Léxicos!");
+                bw.newLine ();
             }
             
+            if(!errosSintaticos.isEmpty()) {
+                bw.newLine ();
+                bw.write("--- ERROS SINTÁTICOS ---");
+                bw.newLine ();
+                for(int i=0; i<errosSintaticos.length(); i++){
+                    if(errosSintaticos.charAt(i) == '\n'){
+                        bw.newLine ();
+                    } else {
+                        bw.write(errosSintaticos.charAt(i));
+                    }                
+                }
+            } else {
+                bw.newLine ();
+                bw.write("--- ERROS SINTÁTICOS ---");
+                bw.newLine ();
+                bw.write("Não foram encontrados erros Sintáticos!");
+                bw.newLine ();
+            }
+                        
             bw.close();
             return true;
         } catch(IOException e) {
             e.getMessage();
             return false;
         }
+    }
+    
+    public String carregarGramatica() {
+        
+        try {                  
+            
+            FileReader fileReader = new FileReader("gramatica.txt");
+            BufferedReader br = new BufferedReader(fileReader);      
+                        
+            String gramatica = ""; 
+            String linha = br.readLine();           
+            while(linha != null){                
+                gramatica += linha+"\n"; 
+                linha = br.readLine();
+            }   
+            
+            br.close();            
+            return gramatica;
+        } catch(IOException e) {
+            return e.getMessage();
+        }  
     }
 }

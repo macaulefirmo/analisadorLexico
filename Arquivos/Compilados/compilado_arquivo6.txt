@@ -1,39 +1,6 @@
---- TOKENS ---
-<Cadeia_de_Caracteres, ", 1>
-<Delimitador, ;, 1>
-<Op.Logico, !, 2>
-<Delimitador, [, 2>
-<Delimitador, ], 2>
-<Delimitador, ,, 2>
-<Delimitador, ;, 2>
-<Cadeia_de_Caracteres,  \ , 3>
-<Delimitador, ;, 3>
-<Identificador_1, e, 4>
-<Op.Logico, &, 4>
-<Identificador_2, comercial, 4>
-<Delimitador, ;, 4>
-<Op.Logico, &, 5>
-<Op.Aritmetico, *, 5>
-<Op.Logico, &, 5>
-<Delimitador, ;, 5>
-<Identificador_3, x, 6>
-<Op.Aritmetico, *, 6>
-<Delimitador, (, 6>
-<Numero, -32, 6>
-<Delimitador, ), 6>
-<Delimitador, ;, 6>
-<Identificador_4, ad, 7>
-<Op.Aritmetico, -, 7>
-<Identificador_5, bc, 7>
-<Delimitador, ;, 7>
-<Identificador_4, ad, 8>
-<Op.Aritmetico, -, 8>
-<Identificador_5, bc, 8>
-<Delimitador, ;, 8>
-<Identificador_4, ad, 9>
-<Delimitador, ;, 9>
-<Identificador_6, a, 10>
---- ERROS ---
+** ARQUIVO COMPILADO COM SUCESSO! **
+
+--- ERROS LÉXICOS ---
 Erro na linha 7 - Caractere inválido
 Erro na linha 7 - Caractere inválido
 Erro na linha 7 - Caractere inválido
@@ -51,3 +18,6 @@ Erro na linha 10 - Caractere inválido
 Erro na linha 10 - Caractere inválido
 Erro na linha 10 - Caractere inválido
 Erro na linha 11 - Fecha aspas não encontrado!
+
+--- ERROS SINTÁTICOS ---
+Não foram encontrados erros Sintáticos!

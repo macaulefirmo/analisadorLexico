@@ -1,8 +1,7 @@
---- TOKENS ---
-<Identificador_1, String, 2>
-<Identificador_2, ea, 2>
-<Delimitador, ;, 2>
-<Palavra_Reservada, string, 3>
-<Identificador_3, iu, 3>
-<Delimitador, ;, 3>
---- ERROS ---
+** ARQUIVO COMPILADO COM SUCESSO! **
+
+--- ERROS LÉXICOS ---
+Não foram encontrados erros Léxicos!
+
+--- ERROS SINTÁTICOS ---
+Não foram encontrados erros Sintáticos!

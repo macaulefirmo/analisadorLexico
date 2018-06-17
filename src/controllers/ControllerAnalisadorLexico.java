@@ -2,37 +2,9 @@ package controllers;
 
 import models.TabelaSimbolo;
 import models.Token;
-import persistencia.ManipulaArquivo;
 
 public class ControllerAnalisadorLexico {
-           
-    /**
-     * Obtem os arquivos da pasta Arquivo e compila um por vez.
-     */
-    public void start() {
-        ManipulaArquivo ma = new ManipulaArquivo();
-        // Obtem o nome do(s) arquivo(s).
-        String[] arquivos = ma.getArquivos();
-        
-        for(int i=0; i<arquivos.length; i++) {
-            // Obtem o conteudo do arquivo.
-            String texto = ma.lerArquivo(arquivos[i]);
-            // Divide o nome do diretorio pela \ (Arquivos\nomeDoArquivo.txt)
-            String[] arrayS = arquivos[i].split("\\\\");
-            System.out.println("Compilando arquivo \""+arrayS[1]+"\" ...");
-            
-            if(!texto.isEmpty()) {
-                Token tokens = new Token();
-                TabelaSimbolo simbolos = new TabelaSimbolo();
-                // Percorre os caracteres do texto e retorna os erros encontrados.
-                String erros = lerCaracteres(texto, tokens, simbolos); 
-                // Salva o resultado da compilacao em um Arquivo de mesmo nome e prefixo compilado_ na pasta Arquivos/Compilados.
-                ma.salvaArquivo(tokens.getTokens(), erros, "Arquivos/Compilados/compilado_"+arrayS[1]);
-                System.out.println("Arquivo compilado com sucesso!\n");
-            }            
-        }
-    }
-    
+       
     /**
      * Percorre caractere por caractere da String, cataloga os tokens, lexemas e os respectivos erros.
      * @param texto String
@@ -40,7 +12,7 @@ public class ControllerAnalisadorLexico {
      * @param simbolos TabelaSimbolo
      * @return String - Erros
      */
-    public String lerCaracteres(String texto, Token tokens, TabelaSimbolo simbolos){
+    public String analisar(String texto, Token tokens, TabelaSimbolo simbolos){
         
         // Contador de posicoes da String.
         int i = 0;
@@ -473,13 +445,8 @@ public class ControllerAnalisadorLexico {
                         // Adiciona ao Token anterior.
                         anterior = cadeia;
                     } else {
-                        if(linhaInicial == linha) {
-                            // Adiciona o Erro encontrado.
-                            erros += "Erro na linha "+linha+" - Cadeia de caracteres inválida!\n";
-                        } else {
-                            // Adiciona o Erro encontrado.
-                            erros += "Erro entre as linhas "+linhaInicial+" e "+linha+" - Cadeia de caracteres inválida!\n";
-                        } 
+                        // Adiciona o Erro encontrado.
+                        erros += "Erro na linha "+linha+" - Cadeia de caracteres inválida!\n";
                     }   
                 }        
             // Verifica se o caractere eh um digito.    

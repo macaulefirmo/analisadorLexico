@@ -1,49 +1,7 @@
---- TOKENS ---
-<Palavra_Reservada, function, 4>
-<Identificador_1, myFunction, 4>
-<Delimitador, (, 4>
-<Palavra_Reservada, int, 4>
-<Identificador_2, a, 4>
-<Delimitador, ,, 4>
-<Palavra_Reservada, int, 4>
-<Identificador_3, b, 4>
-<Delimitador, ,, 4>
-<Palavra_Reservada, string, 4>
-<Identificador_4, texto, 4>
-<Delimitador, ), 4>
-<Delimitador, {, 4>
-<Identificador_5, i, 6>
-<Op.Relacional, =, 6>
-<Identificador_2, a, 6>
-<Op.Aritmetico, ++, 6>
-<Op.Aritmetico, +, 6>
-<Numero, -2, 6>
-<Delimitador, ;, 6>
-<Palavra_Reservada, bool, 8>
-<Identificador_6, chave, 8>
-<Op.Relacional, =, 8>
-<Palavra_Reservada, true, 8>
-<Delimitador, ;, 8>
-<Palavra_Reservada, while, 9>
-<Delimitador, (, 9>
-<Identificador_6, chave, 9>
-<Delimitador, ), 9>
-<Delimitador, {, 9>
-<Palavra_Reservada, if, 10>
-<Delimitador, (, 10>
-<Identificador_5, i, 10>
-<Op.Relacional, >, 10>
-<Numero, 10, 10>
-<Delimitador, ), 10>
-<Delimitador, {, 10>
-<Identificador_6, chave, 11>
-<Op.Relacional, =, 11>
-<Palavra_Reservada, false, 11>
-<Delimitador, ;, 11>
-<Delimitador, }, 12>
-<Identificador_5, i, 13>
-<Op.Aritmetico, ++, 13>
-<Delimitador, ;, 13>
-<Delimitador, }, 14>
-<Delimitador, }, 15>
---- ERROS ---
+** ARQUIVO COMPILADO COM SUCESSO! **
+
+--- ERROS LÉXICOS ---
+Não foram encontrados erros Léxicos!
+
+--- ERROS SINTÁTICOS ---
+Não foram encontrados erros Sintáticos!

@@ -1,22 +1,13 @@
---- TOKENS ---
-<Identificador_1, ab, 1>
-<Identificador_2, cd, 1>
-<Delimitador, ;, 1>
-<Identificador_3, a12___34, 2>
-<Delimitador, ., 2>
-<Delimitador, ], 2>
-<Delimitador, [, 2>
-<Delimitador, ;, 2>
-<Numero, 12, 3>
-<Delimitador, ;, 3>
-<Identificador_4, asass, 4>
-<Identificador_5, asasa, 5>
-<Delimitador, ;, 5>
---- ERROS ---
+** ARQUIVO COMPILADO COM SUCESSO! **
+
+--- ERROS LÉXICOS ---
 Erro na linha 1 - Caractere inválido
 Erro na linha 2 - Caractere inválido
 Erro na linha 2 - Caractere inválido
 Erro na linha 4 - Caractere inválido
-Erro entre as linhas 4 e 5 - Cadeia de caracteres inválida!
+Erro na linha 5 - Cadeia de caracteres inválida!
 Erro na linha 5 - Caractere inválido
 Erro na linha 9 - Fecha aspas não encontrado!
+
+--- ERROS SINTÁTICOS ---
+Não foram encontrados erros Sintáticos!

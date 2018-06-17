@@ -1,10 +1,16 @@
 package models;
 
+import java.util.ArrayList;
+
 public class Token {
     
     // Armazena os Tokens adicionados.
-    private String tokens = "";
+    private ArrayList<String> listTokens;
 
+    public Token() {
+        listTokens = new ArrayList();
+    }
+    
     /**
      * Adiciona um novo Token.
      * @param classe
@@ -14,9 +20,9 @@ public class Token {
     public void addToken(String classe, String valor, int linha) {
         
         if(linha != 0) {
-            this.tokens += "<"+classe+", "+valor+", "+linha+">\n";
+            this.listTokens.add("<"+classe+", "+valor+", "+linha+">");
         } else {
-            this.tokens += "<"+classe+", "+valor+">\n";
+            this.listTokens.add("<"+classe+", "+valor+">");
         }    
     }
 
@@ -24,7 +30,7 @@ public class Token {
      * Retorna os tokens adicionados.
      * @return 
      */
-    public String getTokens() {
-        return tokens;
+    public ArrayList<String> getTokens() {
+        return this.listTokens;
     }
 }
